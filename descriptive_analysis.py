@@ -11,28 +11,24 @@ import pandas as pd
 
 #2. Initial Work
 #my_ds=input('Enter dataset file name:')
-
-
+#my_tv=input('Enter target variable name:')
 
 my_ds=dataset
-my_tv="TOPLAM_SURE_OLUSTURMA_RECEIVE"
+my_tv="KATEGORIK_SURE" #"TOPLAM_SURE_OLUSTURMA_RECEIVE"
 #3. Core Work
 
-#Bir buçuk yıldan geç gelen veriler bozuk olarak varsayılmıştır. 
-my_ds.drop(my_ds[my_ds[my_tv]>=540].index, inplace=True)
-my_ds.drop(my_ds[my_ds[my_tv]<=0].index, inplace=True)
 
-
-#bozuk veri düzeltmece Yurtiçi / Yurtdışı
-my_ds["YURT_ICI_DISI"]=my_ds.YURT_ICI_DISI.replace('Yurt dýþý','Yurt dışı')
-my_ds["YURT_ICI_DISI"]=my_ds.YURT_ICI_DISI.replace('Yurt Ýçi','Yurt içi')
-my_ds["YURT_ICI_DISI"]=my_ds.YURT_ICI_DISI.replace('YURTIÇI ÖDEME','Yurt içi')
-my_ds["YURT_ICI_DISI"]=my_ds.YURT_ICI_DISI.replace('Yurt d???','Yurt dışı')
-
-#Descriptive for all dataset
+# Descriptive for all dataset
 descriptive_all=my_ds.describe(include='all')
 descriptive_categoric=my_ds.describe(include='object')
 descriptive_numeric=my_ds.describe()
+
+# Column üzerinde gezerek 
+for column in my_ds:
+    if my_ds[column].dtype == 'object': #Kategorik değişkense
+        if my_ds[column].value_counts().size<=4:    #Unique değeri 5'ten azsa çizsin
+            my_ds[my_tv].hist(bins=100,  by=my_ds[column]) #Histogram çizdir paşam
+
 
 #Unique values of variables.
 desc1_country=my_ds["COUNTRY"].value_counts() #To get as array: my_ds["COUNTRY"].unique()
@@ -42,7 +38,7 @@ desc1_satinalmaci_id_new=my_ds["SATINALMACI_ID_NEW"].
 
 
 #Histogram için kullanılan kodlar
-
+my_ds[my_tv].describe()
 my_ds[my_tv].hist(bins=200)
 my_ds[my_tv].hist(bins=100,  by=my_ds["SATINALMACI_ID_NEW"])
 #my_ds[my_tv].hist(bins=100, by=my_ds["COUNTRY"] )
