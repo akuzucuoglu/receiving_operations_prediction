@@ -7,18 +7,18 @@ Created on Mon Oct 29 22:58:12 2018
 
 #Data Preprocessing
 
-#2. Bir buçuk yıldan geç gelen veriler bozuk olarak varsayılmıştır. 
+#2. TOPLAM_SURE_OLUSTURMA_RECEIVE: Bir buçuk yıldan geç gelen veriler bozuk olarak varsayılmıştır. 
 dataset.drop(dataset[dataset["TOPLAM_SURE_OLUSTURMA_RECEIVE"]>=540].index, inplace=True)
 dataset.drop(dataset[dataset["TOPLAM_SURE_OLUSTURMA_RECEIVE"]<=0].index, inplace=True)
 dataset.drop(dataset[dataset["TOPLAM_SURE_OLUSTURMA_RECEIVE"].isnull()].index, inplace=True)
 
 
-#3. Bozuk veri düzeltmece Yurtiçi / Yurtdışı
+#3.YURT_ICI_DISI:  Bozuk veri düzeltmece Yurtiçi / Yurtdışı
 dataset["YURT_ICI_DISI"]=dataset.YURT_ICI_DISI.replace('Yurt dýþý','Yurt dışı')
 dataset["YURT_ICI_DISI"]=dataset.YURT_ICI_DISI.replace('Yurt Ýçi','Yurt içi')
 dataset["YURT_ICI_DISI"]=dataset.YURT_ICI_DISI.replace('YURTIÇI ÖDEME','Yurt içi')
 
-#4. fill na columns for CITY, fill with COUNTRTY 
+#4.CITY:  fill na columns for CITY, fill with COUNTRTY 
 g=dataset[dataset["CITY"].isnull()]
 dataset["CITY"].fillna(dataset["COUNTRY"], inplace=True)
 
@@ -61,15 +61,94 @@ dagitici_mi = (dataset["VENDOR_TYPE"].str.contains("DAGITICI"))
 dataset.loc[dagitici_mi,"DAGITICI_MI" ]="Y"
 dataset.loc[dataset["DAGITICI_MI"]=="","DAGITICI_MI"]="N"
 
+
+#CITY Veri düzeltmesi:
 #bozuk veri düzeltmece CITY (Ankara olanlar için)
-dataset["CITY"]=dataset.CITY.replace('YEN?MAHALLE','ANKARA')
+dataset["CITY"]=dataset.CITY.replace('YENIMAHALLE','ANKARA')
 dataset["CITY"]=dataset.CITY.replace('KAHRAMAN KAZAN','ANKARA')
+dataset["CITY"]=dataset.CITY.replace('GÖLBASI','ANKARA')
+dataset["CITY"]=dataset.CITY.replace('ELMADAG','ANKARA')
+dataset["CITY"]=dataset.CITY.replace('ÇANKAYA','ANKARA') 
+dataset["CITY"]=dataset.CITY.replace('POLATLI','ANKARA')  
+dataset["CITY"]=dataset.CITY.replace('ETIMESGUT','ANKARA')   
+dataset["CITY"]=dataset.CITY.replace('ANKRA','ANKARA')
+dataset["CITY"]=dataset.CITY.replace('SINCAN','ANKARA')
+dataset["CITY"]=dataset.CITY.replace('ÇUBUK','ANKARA')
+dataset["CITY"]=dataset.CITY.replace('DISKAPI','ANKARA')
+dataset["CITY"]=dataset.CITY.replace('DIKMEN','ANKARA')
+dataset["CITY"]=dataset.CITY.replace('ALTINDAG','ANKARA') 
+
+
+dataset["CITY"]=dataset.CITY.replace('ISTANNBUL','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('ISTANBUIL','ISTANBUL') 
+dataset["CITY"]=dataset.CITY.replace('ISTABUL','ISTANBUL') 
+dataset["CITY"]=dataset.CITY.replace('ISTABUL','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('Y.DUDULLU ','ISTANBUL') 
+dataset["CITY"]=dataset.CITY.replace('ARNAVUTKÖY','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('TAKSIM','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('ÜMRANIYE','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('BAGCILAR','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('KARAKÖY','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('BEYLIKDÜZÜ','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('KARTAL','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('BAYRAMPASA','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('TUZLA','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('PENDIK','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('SISLI','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('Y.DUDULLU','ISTANBUL')
+dataset["CITY"]=dataset.CITY.replace('KADIKÖY','ISTANBUL')
+
+
+dataset["CITY"]=dataset.CITY.replace('KEMALPASA','IZMIR')
+dataset["CITY"]=dataset.CITY.replace('SELÇUK','IZMIR')
+
+dataset["CITY"]=dataset.CITY.replace('NILÜFER','BURSA')
+
+
+dataset["CITY"]=dataset.CITY.replace('CN','BEIJING')
+dataset["CITY"]=dataset.CITY.replace('CHINA','BEIJING')
+
+
+dataset["CITY"]=dataset.CITY.replace('11788','US')
+dataset["CITY"]=dataset.CITY.replace('NEW YORK','US')
+dataset["CITY"]=dataset.CITY.replace('NY','US')
+dataset["CITY"]=dataset.CITY.replace('CLIFTON','US')
+dataset["CITY"]=dataset.CITY.replace('CHICAGO','US')
+dataset["CITY"]=dataset.CITY.replace('ILLINOIS','US')
+dataset["CITY"]=dataset.CITY.replace('AUSTIN','US')
+dataset["CITY"]=dataset.CITY.replace('NEWYORK','US')
+dataset["CITY"]=dataset.CITY.replace('NJ 07066','US')
+dataset["CITY"]=dataset.CITY.replace('FL 32164','US')
+dataset["CITY"]=dataset.CITY.replace('ATLANTA','US')
+dataset["CITY"]=dataset.CITY.replace('WOODBRIDGE','US') 
+
+dataset["CITY"]=dataset.CITY.replace('137-073','SEOUL')
+
+dataset["CITY"]=dataset.CITY.replace('76700','FR')
+dataset["CITY"]=dataset.CITY.replace('FRANSA','FR')
+dataset["CITY"]=dataset.CITY.replace('PARIS','FR')
+
+dataset["CITY"]=dataset.CITY.replace('WOODLEY','GB')
+
+
+dataset["CITY"]=dataset.CITY.replace('KARAPINAR','KONYA')
+dataset["CITY"]=dataset.CITY.replace('SELCUKLU','KONYA')
+dataset["CITY"]=dataset.CITY.replace('SELÇUKLU','KONYA')
+dataset["CITY"]=dataset.CITY.replace('KULU','KONYA')
+dataset["CITY"]=dataset.CITY.replace('KARATAY','KONYA')
+
+dataset["CITY"]=dataset.CITY.replace('MARMARIS','MUGLA')
+
+
+city_unique=dataset["CITY"].value_counts()
 
 #ANKARA_MI yeni kolonu oluştur. CITY at.
 dataset["ANKARA_MI"] =""
 dataset.loc[(dataset["CITY"].str.contains("ANKARA")),"ANKARA_MI" ]=1
 dataset.loc[dataset["ANKARA_MI"]=="","ANKARA_MI"]=0
 dataset.pop("CITY")
+
+
 
 #ITEM_CATEGORY kolonu 
 #regexp example
@@ -138,9 +217,7 @@ for deger in count_of_proje_kucuk["PROJE"]:
 
 
 ##Kullanılmayan kolonlar atılmaktadır.
-dataset.pop ("ITEM_CATEGORY")
-dataset.pop ("KALITE_PROV")
-dataset.pop ("VENDOR_TYPE")
+    #1. Kesin drop edilecek kolonlar.
 dataset.pop ("SIPARIS_NO")
 dataset.pop ("SIP_SATIR_NO")
 dataset.pop ("SIP_SEVK_NO")
@@ -148,33 +225,44 @@ dataset.pop ("SIP_SEVK_TESLIM_ALINAN")
 dataset.pop ("SIP_SATIR_MIKTAR")
 dataset.pop ("SIP_SEVK_KABUL")
 dataset.pop ("SIP_SEVK_RET")
-dataset.pop ("PLANLANAN_TESLIM_ALMA_TARIHI")
 dataset.pop ("DELIVER_EKSI_PLANLANAN")
 dataset.pop ("RECEIVE_EKSI_PLANLANAN")
-dataset.pop ("MIN_RECEIVE_DATE")
-dataset.pop ("GEREKSINIM_TARIHI")
-dataset.pop ("SIP_ONAY_TARIHI")
-dataset.pop ("SEVKIYAT_OLUSTURMA_TARIHI")
-dataset.pop ("MIN_DELIVER_DATE")
-dataset.pop ("SIP_SEVK_MIKTAR")
-dataset.pop ("SIP_SEVK_UOM")
-dataset.pop ("SIP_SATIR_KALEM")
-dataset.pop ("TEDARIKCI")
-dataset.pop ("ITEM_TYPE")
-dataset.pop("PROJE")
 dataset.pop("CEVRIM_MIKTAR")
 dataset.pop("PRIMARY_UOM_CODE")
+dataset.pop ("KALITE_PROV")
+dataset.pop ("SIP_SEVK_UOM")
+dataset.pop ("ITEM_CATEGORY")
+dataset.pop ("SIP_SEVK_MIKTAR")
 #Toplam Süreyi tahminlemeyi ayır. Kullanmadığın indep. variable'ları pop et. Kullanacağını bırak.
-dataset.pop("TOPLAM_SURE_OLUSTURMA")
 #y_dataset_tso_receive = numeric_dataset.pop("TOPLAM_SURE_OLUSTURMA_RECEIVE")
+dataset.pop("TOPLAM_SURE_OLUSTURMA")
 dataset.pop("DELIVER_EKSI_RECEIVE")
 dataset.pop("RECEIVE_EKSI_GEREKSINIM")
 dataset.pop("DELIVER_EKSI_GEREKSINIM")
 
 
+    #2. Fayda sağlayabilecek kolonlar 
+dataset.pop ("VENDOR_TYPE")
+dataset.pop ("PLANLANAN_TESLIM_ALMA_TARIHI")
+dataset.pop ("MIN_RECEIVE_DATE")
+dataset.pop ("GEREKSINIM_TARIHI")
+dataset.pop ("SIP_ONAY_TARIHI")
+dataset.pop ("SEVKIYAT_OLUSTURMA_TARIHI")
+dataset.pop ("MIN_DELIVER_DATE")
+dataset.pop ("SIP_SATIR_KALEM")
+dataset.pop ("TEDARIKCI")
+dataset.pop ("ITEM_TYPE")
+dataset.pop("PROJE")
+
+    #3. İşe yaramadığı bilinen kolonlar
+dataset.pop("DAGITICI_MI")
+dataset.pop("SATINALMACI_ID_NEW")
+dataset.pop("PROJE_NEW")
+dataset.pop("COUNTRY")
+
 #1. numerik alanlar stringe çevrildi
-dataset["SATINALMACI_ID_NEW"]=dataset["SATINALMACI_ID_NEW"].astype('str')
-dataset["PROJE_NEW"]=dataset["PROJE_NEW"].astype('str')
+#dataset["SATINALMACI_ID_NEW"]=dataset["SATINALMACI_ID_NEW"].astype('str')
+#dataset["PROJE_NEW"]=dataset["PROJE_NEW"].astype('str')
 dataset["SEVKIYAT_OLUSTURMA_YIL"]=dataset["SEVKIYAT_OLUSTURMA_YIL"].astype('str')
 dataset["SEVKIYAT_OLUSTURMA_YIL_AY"]=dataset["SEVKIYAT_OLUSTURMA_YIL_AY"].astype('str')
 dataset["ANKARA_MI"]=dataset["ANKARA_MI"].astype('str')
@@ -194,3 +282,18 @@ for c in char_cols:
 
 numeric_dataset = pd.get_dummies(numeric_dataset,columns = char_cols, drop_first = True)
 
+
+#Kullanmadığın değişkenleri kaldır.
+del deger
+del count_kucuk_satinalmaci
+del count_of_butce_tipi
+del count_of_butce_tipi_kucuk
+del count_of_item_Cat
+del count_of_kucuk_item_Cat
+del count_of_proje_kucuk
+del count_of_satinalmaci
+del nulls
+del yurt_ici_non_tr_nan_values
+del yurt_ici_tr_nan_values
+del ut_nan_gt_values
+del ut_nan_gy_values
