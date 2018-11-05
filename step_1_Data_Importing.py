@@ -5,6 +5,9 @@ Created on Mon Oct 29 23:07:51 2018
 @author: Ahmet
 """
 
+from __main__ import *
+print("step_1_Data_Importing_Start")
+
 import pandas as pd
 
 #Boş data set oluşturmak için yapıldı.

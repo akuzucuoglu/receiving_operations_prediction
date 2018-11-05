@@ -5,6 +5,10 @@ Created on Mon Oct 29 22:29:29 2018
 @author: Ahmet
 """
 
+
+from __main__ import *
+print("step_3_Data_Train_Test_Split_Start")
+
 #Adım 3: Train Test Split  
 
 

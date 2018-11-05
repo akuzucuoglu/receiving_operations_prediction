@@ -5,6 +5,11 @@ Created on Mon Oct 29 22:58:12 2018
 @author: Ahmet
 """
 
+
+
+from __main__ import *
+print("step_2_Data_Preprocessing_Start")
+
 #Data Preprocessing
 
 #2. TOPLAM_SURE_OLUSTURMA_RECEIVE: Bir buçuk yıldan geç gelen veriler bozuk olarak varsayılmıştır. 

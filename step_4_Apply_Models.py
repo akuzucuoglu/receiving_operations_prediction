@@ -5,6 +5,10 @@ Created on Tue Oct 30 01:06:45 2018
 @author: Ahmet
 """
 
+
+from __main__ import *
+print("step_4_Apply_Models_Start")
+
 # Model_1. Random Forest Classifier
 if model_applied=='RFC'  :
     
@@ -147,6 +151,10 @@ elif model_applied=='KNN' :
     from sklearn.metrics import confusion_matrix
     cm = confusion_matrix(y_test, y_pred)
     y_accuracy=sum(cm.diagonal())/len(y_test.index)
+    
+    from sklearn.metrics import precision_recall_fscore_support
+    prf_scores=precision_recall_fscore_support(y_test, y_pred, average='macro')
+    
     print (' ')
     print (' ')
     print ('Accuracy is', y_accuracy )
@@ -228,8 +236,8 @@ elif model_applied=='ANN' :
     
     
     #Feature Importance
-    feature_importance_cat = classifier.feature_importances_
-    feature_importance_sorted_cat = np.sort(feature_importance_cat)
+   # feature_importance_cat = classifier.feature_importances_
+   # feature_importance_sorted_cat = np.sort(feature_importance_cat)
     
     
     from sklearn.metrics import confusion_matrix

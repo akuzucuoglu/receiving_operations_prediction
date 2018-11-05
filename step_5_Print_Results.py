@@ -5,6 +5,10 @@ Created on Mon Oct 29 22:29:29 2018
 @author: Ahmet
 """
 
+print("step_5_Print_Results_Start")
+from __main__ import *
+
+
 import time
 import datetime
 
@@ -19,7 +23,10 @@ from xlutils.copy import copy as xl_copy
 
 #book = xlwt.Workbook()
 prebook= xlrd.open_workbook('model_runs.xls')
-sheetname=model_applied+test_set_size+str(X_str)
+
+sheet_param=max([number_of_neighbors,number_of_trees,number_of_epochs])
+
+sheetname=model_applied+'_'+str(sheet_param)+'_'+test_set_size+'_'+str(X_str)
 
 book=xl_copy(prebook)
 sh = book.add_sheet(sheetname)
